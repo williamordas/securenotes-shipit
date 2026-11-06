@@ -34,16 +34,16 @@ Your job is to turn every red one green without breaking a green one.
 Files: `app/static/index.html` and `app/static/styles.css`
 Check with: `pytest tests/test_accessibility.py tests/test_performance.py`
 
-- [ ] **TASK 1 — Perceivable.** Add `lang` to `<html>`, a real `<title>`, and
+- [x] **TASK 1 — Perceivable.** Add `lang` to `<html>`, a real `<title>`, and
       `alt` text on both images.
-- [ ] **TASK 2 — Structure & controls.** Make the content a `<main>` landmark,
+- [x] **TASK 2 — Structure & controls.** Make the content a `<main>` landmark,
       fix the heading levels so they don't skip (h1 → h2, not h1 → h3), and turn
       the fake `<div class="btn">` into a real `<button>`.
-- [ ] **TASK 3 — Labels.** Replace the `<span class="fake-label">` text with real
+- [x] **TASK 3 — Labels.** Replace the `<span class="fake-label">` text with real
       `<label for="...">` tied to each input's `id`.
-- [ ] **TASK 4 — Contrast.** In `styles.css`, darken `--ink` and `--brand` until
+- [x] **TASK 4 — Contrast.** In `styles.css`, darken `--ink` and `--brand` until
       both contrast tests pass (WCAG AA = 4.5:1).
-- [ ] **TASK 5 — Performance.** `defer` the script, add `width`/`height` to both
+- [x] **TASK 5 — Performance.** `defer` the script, add `width`/`height` to both
       images, and `loading="lazy"` to the content image.
 
 ## Part B — Ship it on a pipeline (Week 17)
@@ -51,8 +51,8 @@ Check with: `pytest tests/test_accessibility.py tests/test_performance.py`
 File: `.github/workflows/ci.yml`
 Check with: `pytest tests/test_pipeline.py`
 
-- [ ] **TASK 6 — Triggers.** Run the workflow on `push` and `pull_request` to `main`.
-- [ ] **TASK 7 — The job.** One `test` job on `ubuntu-latest` that checks out the
+- [x] **TASK 6 — Triggers.** Run the workflow on `push` and `pull_request` to `main`.
+- [x] **TASK 7 — The job.** One `test` job on `ubuntu-latest` that checks out the
       code, sets up Python, installs `requirements.txt`, and runs `pytest`.
 
 When all three suites pass locally, run the whole thing once more:
@@ -62,6 +62,12 @@ pytest -q        # everything green
 ```
 
 ## Part C — Push & peer review
+
+- [ ] Push the repository to GitHub and publish the `fast-and-fair` branch.
+- [ ] Open the pull request (`fast-and-fair` → `main`) and confirm GitHub Actions finishes with a green check.
+- [ ] Review another pair's pull request with line comments, then submit an Approve or Request changes verdict.
+
+These Part C steps need your GitHub account and a classmate's pull request, so they are left unchecked until completed.
 
 ```bash
 git init
@@ -82,9 +88,7 @@ you **Approve** or **Request changes**.
 
 ---
 
-## Reflection (answer in 3–4 sentences)
+## Reflection
 
-1. Which accessibility fix would a sighted mouse user never notice but a
-   screen-reader or keyboard user depends on? Why?
-2. Your pipeline runs the Week 16 checks automatically now. How does that stop a
-   teammate from *accidentally* shipping an inaccessible page six weeks from now?
+1. A real label connected to an input is easy for a sighted mouse user to overlook, but it helps screen-reader users identify each field and lets users click the label to focus its input. Making the login control a real button also lets keyboard users reach it and activate it with standard keyboard controls.
+2. The CI pipeline runs the entire test suite on every push and pull request to `main`, so missing labels, contrast failures, performance regressions, and other tested problems are detected before a change is merged. This makes the checks repeatable and reduces the chance that someone accidentally ships a broken page weeks later.
